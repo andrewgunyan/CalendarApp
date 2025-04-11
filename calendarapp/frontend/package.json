@@ -1,0 +1,37 @@
+{
+    "name": "my-calendar-app",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "webpack serve --mode development --open",
+        "build": "webpack --mode production"
+    },
+    "dependencies": {
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.26.10",
+        "@babel/preset-env": "^7.26.9",
+        "@babel/preset-react": "^7.26.3",
+        "babel-loader": "^9.2.1",
+        "css-loader": "^7.1.2",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.99.5",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^4.15.2"
+    },
+    "description": "A calender for returned missionaries similar to the Preach my Gospel application. Lets returned missionaries more easily readjust to post mission life. Includes features such as goal setting, homework scheduling, and group events. Potentially chat rooms or ways to reach out and talk with other missionaries in the same situation.",
+    "main": "webpack.config.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/andrewgunyan/FinalProject.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/andrewgunyan/FinalProject/issues"
+    },
+    "homepage": "https://github.com/andrewgunyan/FinalProject#readme"
+}

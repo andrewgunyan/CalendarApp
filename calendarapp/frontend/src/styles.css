@@ -1,0 +1,45 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .app-header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .app-body {
+    display: flex;
+    flex: 1;
+  }
+  
+  .app-sidebar {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 1rem;
+  }
+  
+  .app-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .app-nav li {
+    margin-bottom: 1rem;
+  }
+  
+  .app-main {
+    flex: 1;
+    padding: 2rem;
+  }
+  
