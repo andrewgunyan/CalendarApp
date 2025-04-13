@@ -1,2 +1,33 @@
-frontend/node_modules/
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# MySQL dump files (optional)
+*.sql
+
+# VSCode settings (optional)
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node modules (if using Node.js)
 node_modules/
+package-lock.json
+
+# Firebase credentials
+firebase_credentials.json

@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles.css'; // ← Import your CSS file
+import './styles.css';
+import { auth } from './firebase';
+import Login from './components/Login';
 
 function App() {
+  const [token, setToken] = useState(null);
+
+  // If no token, show login
+  if (!token) {
+    return <Login onLogin={(t) => setToken(t)} />;
+  }
+
+  // Once logged in, show the main app
   return (
     <div className="app-container">
-      {/* Header */}
       <header className="app-header">
         <h1>📅 My Calendar App</h1>
       </header>
 
-      {/* Body */}
       <div className="app-body">
-        {/* Sidebar */}
         <aside className="app-sidebar">
           <nav className="app-nav">
             <ul>
@@ -23,7 +30,6 @@ function App() {
           </nav>
         </aside>
 
-        {/* Main content */}
         <main className="app-main">
           <h2>Welcome!</h2>
           <p>Your calendar will appear here.</p>
