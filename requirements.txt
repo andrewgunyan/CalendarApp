@@ -2,4 +2,10 @@ firebase-admin
 fastapi
 uvicorn
 sqlalchemy
+python-jose
+python-multipart
+cryptography
+passlib
+python-dotenv
+bcrypt
 mysql-connector-python

@@ -31,3 +31,4 @@ package-lock.json
 
 # Firebase credentials
 firebase_credentials.json
+firebase-key.json
