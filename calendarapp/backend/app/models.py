@@ -32,6 +32,7 @@ class Event(Base):
     creatorId = Column(String(128), ForeignKey("calendar_app.user.uid"))
     locationLatitude = Column(DECIMAL(9,6))
     locationLongitude = Column(DECIMAL(9,6))
+    attendees = relationship("EventAttendee", back_populates="event")
 
 class EventAttendee(Base):
     __tablename__ = "event_attendee"
@@ -39,3 +40,4 @@ class EventAttendee(Base):
     userId = Column(String(128), ForeignKey("calendar_app.user.uid"), primary_key=True)
     eventId = Column(Integer, ForeignKey("calendar_app.event.eventId"), primary_key=True)
     status = Column(String(50), default="invited")
+    event = relationship("Event", back_populates="attendees")

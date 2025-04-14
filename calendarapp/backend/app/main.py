@@ -7,13 +7,17 @@ from .models import User
 from .routers import users
 from . import firebase
 from .database import get_db, test_database
+from .routers import events
+from .routers import goals
 
 app = FastAPI()
 app.include_router(users.router, prefix="/users", tags=["users"])
+app.include_router(events.router)
+app.include_router(goals.router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "http://localhost:8080"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

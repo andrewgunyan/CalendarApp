@@ -7,8 +7,13 @@
         "build": "webpack --mode production"
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@mui/icons-material": "^7.0.2",
+        "@mui/material": "^7.0.2",
         "firebase": "^11.6.0",
         "react": "^18.3.1",
+        "react-big-calendar": "^1.18.0",
         "react-dom": "^18.3.1",
         "react-router-dom": "^7.5.0"
     },

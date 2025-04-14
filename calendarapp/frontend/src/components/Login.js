@@ -1,5 +1,4 @@
-// This is a test
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -8,7 +7,6 @@ function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState('');
-
   const handleAuth = async (e) => {
     e.preventDefault();
     setError('');
@@ -22,17 +20,17 @@ function Login({ onLogin }) {
       }
 
       const token = await userCredential.user.getIdToken();
-      onLogin(token);
+      // console.log("Logged in user UID:", userCredential.user.uid);
+      onLogin(token, userCredential.user.uid);
 
-      // Send token to backend for verification
-      fetch('http://localhost:8000/auth/verify', {
+      fetch('http://localhost:8000/users/auth/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token }),
       })
         .then(res => res.json())
         .then(data => {
-          console.log('User verified:', data);
+          console.log('User verified!', data);
         })
         .catch(err => {
           console.error('Verification failed:', err);

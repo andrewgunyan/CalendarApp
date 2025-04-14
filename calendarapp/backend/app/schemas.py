@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Union, List, Optional
 
 
 # User Schema
@@ -24,8 +24,8 @@ class GoalBase(BaseModel):
     description: Optional[str] = None
 
 class GoalCreate(GoalBase):
-    startDate: datetime
-    endDate: datetime
+    startDate: Union[datetime, str]
+    endDate: Union[datetime, str]
     userId: str
 
 class GoalResponse(GoalBase):
@@ -33,6 +33,23 @@ class GoalResponse(GoalBase):
     startDate: datetime
     endDate: datetime
     userId: str
+
+    class Config:
+        orm_mode = True
+
+# EventAttendee Schema
+class EventAttendeeBase(BaseModel):
+    status: Optional[str] = "invited"
+
+class EventAttendeeCreate(EventAttendeeBase):
+    userId: str
+    eventId: int
+
+class EventAttendeeResponse(EventAttendeeBase):
+    userId: str
+    eventId: int
+    status: str
+    userEmail: Optional[str] = None 
 
     class Config:
         orm_mode = True
@@ -47,32 +64,18 @@ class EventBase(BaseModel):
     locationLongitude: Optional[float] = None
 
 class EventCreate(EventBase):
-    startDate: datetime
-    endDate: datetime
+    startDate: Union[datetime, str]
+    endDate: Union[datetime, str]
     creatorId: str
+    invitees: Optional[List[str]] = []
 
 class EventResponse(EventBase):
     eventId: int
     startDate: datetime
     endDate: datetime
     creatorId: str
-
-    class Config:
-        orm_mode = True
-
-
-# EventAttendee Schema
-class EventAttendeeBase(BaseModel):
-    status: Optional[str] = "invited"
-
-class EventAttendeeCreate(EventAttendeeBase):
-    userId: str
-    eventId: int
-
-class EventAttendeeResponse(EventAttendeeBase):
-    userId: str
-    eventId: int
-    status: str
+    invitees: Optional[List[EventAttendeeResponse]] = []
+    attendees: List[EventAttendeeResponse] = []
 
     class Config:
         orm_mode = True
