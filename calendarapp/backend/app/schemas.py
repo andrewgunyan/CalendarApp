@@ -54,6 +54,9 @@ class EventAttendeeResponse(EventAttendeeBase):
     class Config:
         orm_mode = True
 
+class StatusUpdate(BaseModel):
+    userId: str
+    status: str
 
 # Event Schema
 class EventBase(BaseModel):

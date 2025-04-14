@@ -35,27 +35,35 @@ function Events({ currentUser }) {
           throw new Error('Failed to fetch events');
         }
         const data = await response.json();
-        // console.log(data);
-        setEvents(data);
-
+  
+        const confirmed = data.filter(event => {
+          const userAttendance = event.attendees.find(
+            attendee => attendee.userId === currentUser
+          );
+          return userAttendance?.status === "confirmed";
+        });
+  
         const pending = data.filter(event => {
           const userAttendance = event.attendees.find(
             attendee => attendee.userId === currentUser
           );
           return userAttendance?.status === "pending";
         });
+  
+        setEvents(confirmed);
         setPendingEvents(pending);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
     };
-
+  
     if (currentUser) {
       fetchEvents();
     }
   }, [currentUser]);
+  
 
-    const handleStatusChange = async (eventId, status) => {
+  const handleStatusChange = async (eventId, status) => {
     try {
       const response = await fetch(`http://localhost:8000/events/${eventId}/status`, {
         method: 'POST',
@@ -65,18 +73,32 @@ function Events({ currentUser }) {
           status: status,
         }),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.detail || JSON.stringify(errorData));
       }
-
-      // Remove the event from pending events after status change
-      setPendingEvents(pendingEvents.filter(event => event.eventId !== eventId));
+  
+      // Update pending and confirmed events
+      const updatedEvent = pendingEvents.find(event => event.eventId === eventId);
+  
+      // Remove from pending
+      setPendingEvents(prev => prev.filter(event => event.eventId !== eventId));
+  
+      // If user confirmed, add to confirmed list
+      if (status === 'confirmed' && updatedEvent) {
+        const updatedAttendees = updatedEvent.attendees.map(att => 
+          att.userId === currentUser ? { ...att, status: 'confirmed' } : att
+        );
+        const newConfirmedEvent = { ...updatedEvent, attendees: updatedAttendees };
+  
+        setEvents(prev => [...prev, newConfirmedEvent]);
+      }
     } catch (error) {
       console.error("Error updating status:", error);
     }
   };
+  
 
   const toggleAddForm = () => {
     setShowAddForm(!showAddForm);
@@ -209,7 +231,7 @@ function Events({ currentUser }) {
       </div>
 
       <div className="events-main">
-        <h1>All Events</h1>
+        <h1>Confirmed Events</h1>
         {showAddForm && (
           <div className="event-form">
             <h3>Create New Event</h3>

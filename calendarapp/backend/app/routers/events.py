@@ -10,6 +10,7 @@ from ..schemas import EventResponse
 from ..models import EventAttendee
 from fastapi import Query
 from typing import Optional
+from ..schemas import StatusUpdate
 
 router = APIRouter()
 
@@ -85,13 +86,27 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=400, detail=str(e))
     
-@router.post("/events/{event_id}/join")
-def join_event(event_id: int, user_id: str, db: Session = Depends(get_db)):
-    existing = db.query(EventAttendee).filter_by(userId=user_id, eventId=event_id).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="Already joined")
-    
-    attendee = EventAttendee(userId=user_id, eventId=event_id, status="joined")
-    db.add(attendee)
-    db.commit()
-    return {"message": "User joined event"}
+@router.post("/events/{event_id}/status")
+def update_event_status(event_id: int, status_update: StatusUpdate, db: Session = Depends(get_db)):
+    try:
+        event = db.query(Event).filter(Event.eventId == event_id).first()
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+
+        attendee = db.query(EventAttendee).filter(
+            EventAttendee.eventId == event_id,
+            EventAttendee.userId == status_update.userId
+        ).first()
+
+        if not attendee:
+            raise HTTPException(status_code=404, detail="User is not an attendee of this event")
+
+        attendee.status = status_update.status
+        db.commit()
+
+        return {"message": "Event status updated successfully", "status": status_update.status}
+
+    except Exception as e:
+        db.rollback()  # Rollback transaction in case of error
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
