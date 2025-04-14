@@ -23,7 +23,7 @@ function CalendarComponent({ currentUser }) {
     const fetchData = async () => {
       try {
         // Fetch events
-        const eventResponse = await fetch(`http://localhost:8000/events?creator_id=${currentUser}`);
+        const eventResponse = await fetch(`http://localhost:8000/events?user_id=${currentUser}`);
         if (!eventResponse.ok) throw new Error('Failed to fetch events');
         const eventData = await eventResponse.json();
         const eventList = eventData.map(event => ({

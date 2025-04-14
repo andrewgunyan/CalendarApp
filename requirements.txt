@@ -8,4 +8,5 @@ cryptography
 passlib
 python-dotenv
 bcrypt
+pymysql
 mysql-connector-python
