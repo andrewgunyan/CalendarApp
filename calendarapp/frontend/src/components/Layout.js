@@ -23,8 +23,8 @@ function Layout({ children, onLogout }) {
         <aside className="layout-sidebar">
           <nav>
             <ul>
-              <li><Link to="/">🏠 Calendar</Link></li>
-              <li><Link to="/events">📅 Events</Link></li>
+              <li><Link to="/">📅 Calendar</Link></li>
+              <li><Link to="/events">🎈 Events</Link></li>
               <li><Link to="/goals">🎯 Goals</Link></li>
               <li><Link to="/settings">⚙️ Settings</Link></li>
             </ul>
