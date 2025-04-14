@@ -6,11 +6,11 @@ const CustomToolbar = (props) => {
   const { label, onNavigate, onView } = props;
 
   const buttonStyle = {
-    backgroundColor: '#c6c6c6', // Updated background color
-    color: 'black', // Updated text color
-    padding: '4px 8px', // Reduced padding for smaller buttons
+    backgroundColor: '#cacaca',
+    color: 'black',
+    padding: '4px 8px',
     fontSize: '0.75rem',
-    lineHeight: '1.5', // Adjust line height to center text vertically
+    lineHeight: '1.5',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

@@ -8,7 +8,7 @@
   /* Top banner */
   .layout-header {
     height: 60px;
-    background-color: #202123;
+    background-color: #1a202c;
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -25,7 +25,7 @@
   /* Sidebar */
   .layout-sidebar {
     width: 150px;
-    background-color: #2b2c30;
+    background-color: #2d3748;
     color: white;
     padding: 1rem;
   }
