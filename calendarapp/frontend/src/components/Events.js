@@ -210,7 +210,6 @@ function Events({ currentUser }) {
     const updated = invitees.filter((_, i) => i !== index);
     setInvitees(updated);
   };
-  
 
   return (
     <div className="events-container">

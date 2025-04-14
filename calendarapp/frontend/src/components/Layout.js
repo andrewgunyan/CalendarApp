@@ -14,7 +14,7 @@ function Layout({ children, onLogout }) {
     <div className="layout-container">
       {/* Top Banner */}
       <header className="layout-header">
-        <h1 className="layout-title">📅 My Calendar App</h1>
+        <h1 className="layout-title">📅 Schedulife</h1>
         <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </header>
 
