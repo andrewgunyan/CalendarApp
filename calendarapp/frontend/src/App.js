@@ -73,6 +73,14 @@ function App() {
           </Layout>
         }
       />
+      <Route
+        path="/"
+        element={
+          <Layout onLogout={handleLogout}>
+            <Calendar currentUser={currentUserId} />
+          </Layout>
+        }
+      />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

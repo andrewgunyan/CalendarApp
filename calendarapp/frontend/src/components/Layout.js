@@ -26,6 +26,7 @@ function Layout({ children, onLogout }) {
               <li><Link to="/">📅 Calendar</Link></li>
               <li><Link to="/events">🎈 Events</Link></li>
               <li><Link to="/goals">🎯 Goals</Link></li>
+              <li><Link to="/world">🌍 Map</Link></li>
               <li><Link to="/settings">⚙️ Settings</Link></li>
             </ul>
           </nav>

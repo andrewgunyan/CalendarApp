@@ -113,7 +113,9 @@ function CalendarComponent({ currentUser }) {
           }
           return { style };
         }}
-        toolbar={(props) => <CustomToolbar {...props} />}
+        components={{
+          toolbar: CustomToolbar
+        }}
         selectable
         onSelectSlot={handleSelectSlot}
       />

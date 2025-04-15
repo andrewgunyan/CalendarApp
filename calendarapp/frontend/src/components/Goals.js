@@ -133,7 +133,7 @@ function Goals({ currentUser }) {
               <div className="goal-view">
                 <h4>{goal.title}</h4>
                 <p>{goal.description}</p>
-                <p>{goal.startDate} → {goal.endDate}</p>
+                <p>{goal.startDate.replace('T', ' ')} → {goal.endDate.replace('T', ' ')}</p>
                 <button onClick={() => handleEdit(goal)}>Edit</button>
                 <button onClick={() => handleDelete(goal.id)}>Delete</button>
               </div>

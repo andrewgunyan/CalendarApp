@@ -290,8 +290,8 @@ function Events({ currentUser }) {
                 >
                   <option value="meeting">Meeting</option>
                   <option value="appointment">Appointment</option>
-                  <option value="workshop">Workshop</option>
-                  <option value="social">Social</option>
+                  <option value="service">Service</option>
+                  <option value="activity">Activity</option>
                 </select>
               </div>
 

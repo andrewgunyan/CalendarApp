@@ -17,7 +17,7 @@ router = APIRouter()
 # Get all events
 @router.get("/events", response_model=List[EventResponse])
 def get_events(
-    user_id: Optional[str] = Query(None),  # Changed from creator_id to user_id
+    user_id: Optional[str] = Query(None), 
     db: Session = Depends(get_db)
 ):
     try:
@@ -56,7 +56,6 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(db_event)
 
-        # Add the creator as an attendee
         creator_attendee = EventAttendee(
             userId=event.creatorId,
             eventId=db_event.eventId,
@@ -75,10 +74,8 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
                     )
                     db.add(invitee_attendee)
                 else:
-                    # Handle case where the user is not found
                     raise HTTPException(status_code=404, detail=f"User with email {invitee_email} not found")
 
-        # Commit all attendee changes
         db.commit()
 
         return db_event
